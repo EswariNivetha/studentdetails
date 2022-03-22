@@ -9,12 +9,16 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Map;
+
 /**
  * RestService.
  *
  * @author EswariNivethaVU
  */
-@Component(immediate = true)
+@Component(immediate = true, name = "system.properties" )
 public class RestService {
 
     private Server server;
@@ -22,15 +26,17 @@ public class RestService {
      * Activate the server.
      */
     @Activate
-    public void activate() {
+    public void activate(Map<String, Object> properties) {
         try {
+            String driver =  (String) properties.get("karaf.jdbc.driver");
+
+            System.out.println(driver);
             JAXRSServerFactoryBean bean = new JAXRSServerFactoryBean();
             bean.setAddress("/student");
             bean.setBus(BusFactory.getDefaultBus());
             bean.setProvider(new JacksonJsonProvider());
             bean.setServiceBean(new StudentApiImpl());
             server = bean.create();
-            //System.out.println(server);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -1,11 +1,14 @@
 package com.theatmo.validation.studentvalidation;
 
-
-
 import com.theatmo.validation.exception.InValidDateException;
 
 import java.time.LocalDate;
 
+/**
+ * CommonValidation Implementation.
+ *
+ * @author EswariNivethaVU
+ */
 public class CommonValidation {
 
     /**
@@ -25,24 +28,6 @@ public class CommonValidation {
     public boolean validateName(final String name) {
         return name.matches("[a-zA-Z\\s]*$") ? true : false;
     }
-
-    /**
-     * Validates the RollNo.
-     *
-     * @param rollNo
-     */
-//    public boolean validateRollNo(final String rollNo) {
-//        return rollNo.matches("[0-9]{3}") ? true : false;
-//    }
-//
-//    /**
-//     * Validates the Standard.
-//     *
-//     * @param standard
-//     */
-//    public boolean validateStandard(final String standard) {
-//        return (standard.matches("([1-9]|1[012])|((?i)PREKG|LKG|UKG)")) ? true : false;
-//    }
 
     /**
      * Validates the EmailId.
@@ -70,13 +55,4 @@ public class CommonValidation {
             throw new InValidDateException("Invalid Date");
         }
     }
-
-//    /**
-//     * Validates the Choice.
-//     *
-//     * @param choice
-//     */
-//    public boolean validateChoice(final String choice) {
-//        return choice.matches("[1-6]") ? true : false;
-//    }
 }

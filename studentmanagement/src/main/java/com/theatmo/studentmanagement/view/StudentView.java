@@ -10,7 +10,6 @@ import com.theatmo.validation.studentvalidation.CommonValidation;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
-import java.util.Map.Entry;
 
 /**
  * Student, View! The StudentView program implements an application that simply
@@ -23,6 +22,7 @@ public class StudentView {
     private static final Logger LOGGER = Logger.getLogger(StudentView.class);
     private static final StudentInputService STUDENT_INPUTS = StudentInputs.getInstance();
     private static final StudentController STUDENT_CONTROLLER = new StudentController();
+
     /**
      * Get rollno from the user.
      */
@@ -42,7 +42,7 @@ public class StudentView {
      * Get the name from the user.
      */
     public String getName() {
-        final String name = STUDENT_INPUTS.getString("Enter the Name: \n Press @ To Exit to Main Menu" );
+        final String name = STUDENT_INPUTS.getString("Enter the Name: \n Press @ To Exit to Main Menu");
         STUDENT_VIEW.backToMain(name);
 
         if (VALIDATOR.validateName(name)) {

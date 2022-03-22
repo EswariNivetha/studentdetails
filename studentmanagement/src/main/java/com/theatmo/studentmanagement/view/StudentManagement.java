@@ -1,16 +1,11 @@
 package com.theatmo.studentmanagement.view;
 
-
-import com.theatmo.studentmanagement.Activator;
-
 import java.util.Scanner;
 
 /**
  * StudentDetails!
  *
  * @author EswariNivethaVU
- * @version 17.0.1
- * @since 1.2
  */
 public class StudentManagement {
 

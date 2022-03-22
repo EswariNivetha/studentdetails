@@ -1,6 +1,5 @@
 package com.theatmo.studentmanagement.service;
 
-
 import com.theatmo.studentmanagement.exception.IdAlreadyFoundException;
 import com.theatmo.studentmanagement.exception.RecordNotfoundException;
 import com.theatmo.studentmanagement.model.Student;
@@ -9,7 +8,6 @@ import com.theatmo.studentmanagement.studentdao.StudentDaoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Student Service Version2.
@@ -19,12 +17,12 @@ import java.util.Map;
 public class StudentServiceImpl implements StudentService {
 
     private static final StudentDao STUDENTDAO = StudentDaoImpl.getInstance();
-
     private static StudentService studentService;
 
     private StudentServiceImpl(){
 
     }
+
     /**
      * Create instance of Singleton class
      */
