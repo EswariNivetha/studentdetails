@@ -1,39 +1,41 @@
 package com.theatmo.databaseconnection.dbconnection;
 
 import com.theatmo.databaseconnection.exception.ConnectionFailedException;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Properties;
+import java.util.Map;
+
 
 /**
  * DataBase Connection.
  *
  * @author EswariNivethaVU
  */
+
 public class DataBaseConnection {
+
+    private static Map<String, String> properties;
 
     /**
      * Connects the Database.
      */
     public static Connection getConnection() {
-        Connection connection = null;
 
         try {
-            InputStream input = new FileInputStream("etc/system.properties");
-            Properties properties = new Properties();
-            properties.load(input);
+            //String driver = properties.get("karaf.jdbc.driver");
             Class.forName("org.postgresql.Driver");
-            final String url = properties.getProperty("karaf.jdbc.url");
-            final String username = properties.getProperty("karaf.jdbc.user");
-            final String password = properties.getProperty("karaf.jdbc.password");
-            connection = DriverManager.getConnection(url, username, password);
+           // Class.forName(driver);
+            final Connection connection = DriverManager.getConnection(properties.get("karaf.jdbc.url"), properties.get("karaf.jdbc.user"), properties.get("karaf.jdbc.password"));
+            return connection;
         } catch (Exception e) {
             throw new ConnectionFailedException("Connection Error");
         }
-        return connection;
+    }
+
+    public static void studentDbConnection(Map<String, String> property) {
+        properties = property;
     }
 }
+
+
+

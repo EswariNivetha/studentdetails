@@ -82,7 +82,7 @@ public class StudentApiImpl extends StudentController implements StudentRestCont
     /**
      * GET which view all the student details.
      */
-    @Path("/view")
+    @Path("/get")
     @Produces("application/json")
     @GET
     public List<Student> getAllStudentdetails(){

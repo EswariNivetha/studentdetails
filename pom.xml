@@ -36,7 +36,6 @@
                 <version>${osgi.version}</version>
                 <scope>provided</scope>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -61,7 +60,6 @@
                         <instructions>
                             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                             <Bundle-Version>${project.version}</Bundle-Version>
-
                         </instructions>
                     </configuration>
                 </plugin>

@@ -1,6 +1,7 @@
 package com.theatmo.databaseconnection.exception;
 
 import com.theatmo.customexception.exception.CustomException;
+
 /**
  * ConnectionFailedException.
  *
@@ -13,8 +14,8 @@ public class ConnectionFailedException extends CustomException {
      *
      * @param msg
      */
-        public ConnectionFailedException(String msg) {
-            super(msg);
-        }
+    public ConnectionFailedException(String msg) {
+        super(msg);
     }
+}
 

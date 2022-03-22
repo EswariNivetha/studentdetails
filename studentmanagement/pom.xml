@@ -88,9 +88,10 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+                <version>${maven-bundle-plugin.version}</version>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>com.theatmo.studentmanagement.Activator</Bundle-Activator>
+<!--                        <Bundle-Activator>com.theatmo.studentmanagement.Activator</Bundle-Activator>-->
                         <Export-Package>
                             com.theatmo*;version=${project.version}
                         </Export-Package>
