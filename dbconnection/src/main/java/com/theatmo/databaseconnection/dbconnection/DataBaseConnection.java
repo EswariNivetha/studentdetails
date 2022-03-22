@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Map;
 
-
 /**
  * DataBase Connection.
  *
@@ -22,9 +21,7 @@ public class DataBaseConnection {
     public static Connection getConnection() {
 
         try {
-            //String driver = properties.get("karaf.jdbc.driver");
             Class.forName("org.postgresql.Driver");
-           // Class.forName(driver);
             final Connection connection = DriverManager.getConnection(properties.get("karaf.jdbc.url"), properties.get("karaf.jdbc.user"), properties.get("karaf.jdbc.password"));
             return connection;
         } catch (Exception e) {
