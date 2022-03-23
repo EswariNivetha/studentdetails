@@ -2,20 +2,15 @@ package com.theatmo.databaseconnection.exception;
 
 import com.theatmo.customexception.exception.CustomException;
 
-/**
- * ConnectionFailedException.
- *
- * @author EswariNivethaVU
- */
 public class ConnectionFailedException extends CustomException {
 
     /**
      * Throws ConnectionFailedException when database connection is failed.
      *
-     * @param msg
+     * @param message
      */
-    public ConnectionFailedException(String msg) {
-        super(msg);
+    public ConnectionFailedException(final String message) {
+        super(message);
     }
 }
 

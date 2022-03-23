@@ -6,11 +6,10 @@ import java.sql.DriverManager;
 import java.util.Map;
 
 /**
- * DataBase Connection.
+ * DataBase Connection which connects the database.
  *
  * @author EswariNivethaVU
  */
-
 public class DataBaseConnection {
 
     private static Map<String, String> properties;
@@ -29,7 +28,12 @@ public class DataBaseConnection {
         }
     }
 
-    public static void studentDbConnection(Map<String, String> property) {
+    /**
+     * Set the property file for Database Connection
+     *
+     * @param property
+     */
+    public static void setProperties(Map < String, String > property) {
         properties = property;
     }
 }

@@ -14,6 +14,8 @@ import java.sql.Date;
 /**
  * Student, View! The StudentView program implements an application that simply
  * displays "User input".
+ *
+ * @author EswariNivethaVU
  */
 public class StudentView {
 
@@ -28,7 +30,7 @@ public class StudentView {
      */
     public int getRollNo() {
         final String rollNo = STUDENT_INPUTS.getString("Enter the RollNo(Give 3 Digit No): \n Press @ To Exit to Main Menu");
-        STUDENT_VIEW.backToMain(rollNo);
+        STUDENT_VIEW.mainMenu(rollNo);
 
         if (Validation.validateRollNo(rollNo)) {
             return Integer.parseInt(rollNo);
@@ -43,7 +45,7 @@ public class StudentView {
      */
     public String getName() {
         final String name = STUDENT_INPUTS.getString("Enter the Name: \n Press @ To Exit to Main Menu");
-        STUDENT_VIEW.backToMain(name);
+        STUDENT_VIEW.mainMenu(name);
 
         if (VALIDATOR.validateName(name)) {
             return name;
@@ -58,7 +60,7 @@ public class StudentView {
      */
     public String getStandard() {
         final String standard = STUDENT_INPUTS.getString("Enter the Standard [PREKG - UKG, 1-12] \n Press @ To Exit to Main Menu");
-        STUDENT_VIEW.backToMain(standard);
+        STUDENT_VIEW.mainMenu(standard);
 
         if (Validation.validateStandard(standard)) {
             return standard;
@@ -73,7 +75,7 @@ public class StudentView {
      */
     public long getPhoneNo() {
         final String phoneNo = STUDENT_INPUTS.getString("Enter the PhoneNumber: \n Press @ To Exit to Main Menu");
-        STUDENT_VIEW.backToMain(phoneNo);
+        STUDENT_VIEW.mainMenu(phoneNo);
 
         if (VALIDATOR.validatePhoneNo(phoneNo)) {
             return Long.parseLong(phoneNo);
@@ -88,7 +90,7 @@ public class StudentView {
      */
     public String getEmailId() {
         final String emailId = STUDENT_INPUTS.getString("Enter the EmailId: \n Press @ To Exit to Main Menu");
-        STUDENT_VIEW.backToMain(emailId);
+        STUDENT_VIEW.mainMenu(emailId);
 
         if (VALIDATOR.validateEmailId(emailId)) {
             return emailId;
@@ -103,13 +105,13 @@ public class StudentView {
      */
     public Date getDate() {
         final String date = STUDENT_INPUTS.getString("Enter Date of Joining(yyyy-mm-dd):");
-        STUDENT_VIEW.backToMain(date);
+        STUDENT_VIEW.mainMenu(date);
         boolean isValid = false;
 
         try {
             isValid = VALIDATOR.validateDate(date);
-        } catch (CustomException e) {
-            LOGGER.error(e);
+        } catch (CustomException customException) {
+            LOGGER.error(customException.getMessage());
         }
 
         if (isValid) {
@@ -129,8 +131,8 @@ public class StudentView {
 
         try {
             STUDENT_CONTROLLER.checkRollno(rollNo);
-        } catch (CustomException e) {
-            System.out.println(e);
+        } catch (CustomException customException) {
+            LOGGER.error(customException);
             StudentView.addStudent();
             StudentManagement.selectChoice();
         }
@@ -145,10 +147,10 @@ public class StudentView {
         try {
 
             if (STUDENT_CONTROLLER.addStudent(student)) {
-                System.out.println("Inserted SuccessFully");
+               LOGGER.info("Inserted SuccessFully");
             }
-        } catch (CustomException e) {
-            LOGGER.error(e);
+        } catch (CustomException customException) {
+            LOGGER.error(customException.getMessage());
         }
     }
 
@@ -156,7 +158,7 @@ public class StudentView {
      * Display all Students and send a request to the controller.
      */
     public static void showAllStudents() {
-        System.out.println(STUDENT_CONTROLLER.getAllStudents());
+        LOGGER.info(STUDENT_CONTROLLER.getAllStudents());
     }
 
     /**
@@ -164,14 +166,13 @@ public class StudentView {
      * controller.
      */
     public static void removeStudent() {
-
         try {
 
             if (STUDENT_CONTROLLER.removeStudent(STUDENT_VIEW.getRollNo())) {
-                System.out.println("Deleted SuccessFully");
+                LOGGER.info("Deleted SuccessFully");
             }
-        } catch (CustomException e) {
-            LOGGER.error(e);
+        } catch (CustomException customException) {
+            LOGGER.error(customException.getMessage());
         }
     }
 
@@ -180,11 +181,10 @@ public class StudentView {
      * controller.
      */
     public static void selectStudent() {
-
         try {
-            System.out.println(STUDENT_CONTROLLER.searchStudentDetail(STUDENT_VIEW.getRollNo()));
-        } catch (CustomException e) {
-            LOGGER.error(e);
+            LOGGER.info(STUDENT_CONTROLLER.searchStudentDetail(STUDENT_VIEW.getRollNo()));
+        } catch (CustomException customException) {
+            LOGGER.error(customException.getMessage());
         }
     }
 
@@ -202,29 +202,29 @@ public class StudentView {
 
         try {
             STUDENT_CONTROLLER.checkRollnoForUpdate(rollNo);
-        } catch (CustomException e) {
-            System.out.println(e);
+        } catch (CustomException customException) {
+            LOGGER.error(customException.getMessage());
             StudentView.updateStudent();
             StudentManagement.selectChoice();
         }
         student.setRollNo(rollNo);
-        System.out.println("Do you want to change your name? yes or no \n Press @ To Exit to Main Menu ");
+        LOGGER.info("Do you want to change your name? yes or no \n Press @ To Exit to Main Menu ");
         StudentView.updateDetail(student, name);
-        System.out.println("Do you want to change your standard? yes or no \n Press @ To Exit to Main Menu ");
+        LOGGER.info("Do you want to change your standard? yes or no \n Press @ To Exit to Main Menu ");
         StudentView.updateDetail(student, standard);
-        System.out.println("Do you want to change your phoneno? yes or no \n Press @ To Exit to Main Menu");
+        LOGGER.info("Do you want to change your phoneno? yes or no \n Press @ To Exit to Main Menu");
         StudentView.updateDetail(student, phoneNo);
-        System.out.println("Do you want to change your email? yes or no \n Press @ To Exit to Main Menu");
+        LOGGER.info("Do you want to change your email? yes or no \n Press @ To Exit to Main Menu");
         StudentView.updateDetail(student, emailId);
-        System.out.println("Do you want to change your joiningdate? yes or no \n Press @ To Exit to Main Menu");
+        LOGGER.info("Do you want to change your joiningdate? yes or no \n Press @ To Exit to Main Menu");
         StudentView.updateDetail(student, date);
 
         try {
             if (STUDENT_CONTROLLER.updateStudentDetails(student)) {
-                System.out.println("Updated Successfully");
+              LOGGER.info("Updated Successfully");
             }
-        } catch (CustomException e) {
-            LOGGER.error(e);
+        } catch (CustomException customException) {
+            LOGGER.error(customException.getMessage());
         }
     }
 
@@ -241,7 +241,7 @@ public class StudentView {
 
         while (true) {
             final String option = StudentManagement.SCANNER.next().trim();
-            STUDENT_VIEW.backToMain(option);
+            STUDENT_VIEW.mainMenu(option);
 
             if (choiceYes.equalsIgnoreCase(option)) {
 
@@ -288,7 +288,7 @@ public class StudentView {
     /**
      * Back to main menu.
      */
-    public void backToMain(String option) {
+    public void mainMenu(String option) {
 
         if ("@".equals(option)) {
             StudentManagement.selectChoice();

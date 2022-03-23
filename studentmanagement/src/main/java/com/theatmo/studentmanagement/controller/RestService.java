@@ -1,45 +1,41 @@
 package com.theatmo.studentmanagement.controller;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
-import com.theatmo.databaseconnection.dbconnection.DataBaseConnection;
-import com.theatmo.studentmanagement.view.StudentManagement;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.log4j.Logger;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
-import java.util.Map;
-
 /**
- * RestService.
+ * RestService which activate the server.
  *
  * @author EswariNivethaVU
  */
-@Component(immediate = true, name = "jdbcconnection")
+@Component(immediate = true)
 public class RestService {
 
     private Server server;
+    private static final Logger LOGGER = Logger.getLogger(RestService.class);
 
     /**
      * Activate the server.
      */
     @Activate
-    public void activate(Map<String, String > properties) {
-        DataBaseConnection.studentDbConnection(properties);
-
+    public void activate() {
         try {
-            JAXRSServerFactoryBean bean = new JAXRSServerFactoryBean();
+            final JAXRSServerFactoryBean bean = new JAXRSServerFactoryBean();
+
             bean.setAddress("/student");
             bean.setBus(BusFactory.getDefaultBus());
             bean.setProvider(new JacksonJsonProvider());
-            bean.setServiceBean(new StudentApiImpl());
+            bean.setServiceBean(new StudentRestControllerImpl());
+
             server = bean.create();
-            StudentManagement.selectChoice();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception exception) {
+            LOGGER.error(exception.getMessage());
         }
     }
 
@@ -48,6 +44,7 @@ public class RestService {
      */
     @Deactivate
     public void deactivate() throws Exception {
+
         if (server != null) {
             server.destroy();
         }

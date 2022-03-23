@@ -1,23 +1,27 @@
 package com.theatmo.studentmanagement.view;
 
+import org.apache.log4j.Logger;
+
 import java.util.Scanner;
 
 /**
- * StudentDetails!
+ * StudentDetails! Implemented crud operation.
  *
  * @author EswariNivethaVU
  */
 public class StudentManagement {
 
     public static final Scanner SCANNER = new Scanner(System.in);
+    private static final Logger LOGGER = Logger.getLogger(StudentView.class);
 
     /**
      * Select choice from user.
      */
     public static void selectChoice() {
         int choice = 0;
+
         do {
-            System.out.println("STUDENT MANAGEMENT \n1.CREATE \n2.SHOW\n3.DELETE\n4.UPDATE\n5.SEARCH\n6.Exit\nEnter your choice:");
+            LOGGER.info("STUDENT MANAGEMENT \n1.CREATE \n2.SHOW\n3.DELETE\n4.UPDATE\n5.SEARCH\n6.Exit\nEnter your choice:");
             choice = Integer.parseInt(StudentView.getChoice());
 
             switch (choice) {

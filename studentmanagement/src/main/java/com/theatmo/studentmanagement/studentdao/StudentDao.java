@@ -11,13 +11,13 @@ import java.util.Map;
  */
 public interface StudentDao {
 
-    boolean addStudent(Student student);
+    boolean addStudent( final Student student);
 
-    boolean removeStudent(int rollno);
+    boolean removeStudent(final int rollno);
 
     Map<Integer, Student> getAllStudents();
 
-    boolean updateStudents(Student student);
+    boolean updateStudents(final Student student);
 
-    Student selectStudent(int rollno);
+    Student selectStudent(final int rollno);
 }

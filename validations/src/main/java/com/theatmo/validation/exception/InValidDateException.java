@@ -10,9 +10,9 @@ public class InValidDateException extends CustomException {
     /**
      * Throws InValidDateException when given date is not valid.
      *
-     * @param msg
+     * @param message
      */
-    public InValidDateException(String msg) {
-        super(msg);
+    public InValidDateException(final String message) {
+        super(message);
     }
 }

@@ -8,6 +8,7 @@ import java.sql.Date;
  * @author EswariNivethaVU
  */
 public class Student {
+
     private int rollNo;
     private String name;
     private String standard;

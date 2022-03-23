@@ -1,7 +1,7 @@
 package com.theatmo.studentinputs.studentinputimpl;
 
 /**
- * StudentInputService.
+ * StudentInputService provide service to StudentInput.
  *
  * @author EswariNivethaVU
  */

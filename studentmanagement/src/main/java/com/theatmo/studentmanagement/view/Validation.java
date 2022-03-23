@@ -1,5 +1,10 @@
 package com.theatmo.studentmanagement.view;
 
+/**
+ * Validates the given Input is valid or not.
+ *
+ * @author EswariNivethaVU
+ */
 public class Validation {
     /**
      * Validates the RollNo.

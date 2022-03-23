@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Student Service Version2.
+ * Student Service Implementation Implements the service provided by StudentService.
  *
  * @author EswariNivethaVU
  */
@@ -82,12 +82,14 @@ public class StudentServiceImpl implements StudentService {
      * @param rollNo
      */
     public Student selectStudent(final int rollNo) {
+        Student student =STUDENTDAO.getAllStudents().get(rollNo);
 
         if (STUDENTDAO.getAllStudents().containsKey(rollNo)) {
             return STUDENTDAO.selectStudent(rollNo);
-        } else {
-            throw new RecordNotfoundException("Record Not Found");
+        } else if(student==null) {
+            throw new RecordNotfoundException("Record Not Found"+rollNo);
         }
+        return student;
     }
 
     /**

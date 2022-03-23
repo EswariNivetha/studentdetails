@@ -2,7 +2,6 @@ package com.theatmo.studentmanagement.controller;
 
 import com.theatmo.studentmanagement.model.Student;
 
-import javax.ws.rs.*;
 import java.util.List;
 import java.util.Map;
 
@@ -13,28 +12,20 @@ import java.util.Map;
  */
 public interface StudentRestController {
 
-    @Path("/add")
-    @Consumes("application/json")
-    @POST
-    boolean addStudent( final Student student);
 
-    @Path("/{rollNo}")
-    @Produces("application/json")
-    @DELETE
-    boolean removeStudent(final int rollNo);
+    Map addStudent(final Student student);
 
-    @Path("/put")
-    @Produces("application/json")
-    @PUT
-    boolean updateStudentDetails(final Student student);
 
-    @Path("/{rollNo}")
-    @Produces("application/json")
-    @GET
-    Student searchStudentDetail(final int rollNo);
+    Map removeStudent(final int rollNo);
 
-    @Path("/view")
-    @Produces("application/json")
-    @GET
-    List<Student> getAllStudentdetails(int start, int limit);
+
+    Map updateStudentDetails(final Student student);
+
+
+    List selectStudent(final int rollNo);
+
+
+    List getAllStudents(final int page,final int limit);
+
+
 }

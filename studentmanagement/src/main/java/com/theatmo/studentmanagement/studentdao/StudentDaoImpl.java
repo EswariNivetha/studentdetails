@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Database Implementation.
+ * StudentDao Implementation implements the service provided by StudentDao  .
  *
  * @author EswariNivethaVU
  */
@@ -20,6 +20,10 @@ public class StudentDaoImpl implements StudentDao {
     private StudentDaoImpl(){
 
     }
+
+    /**
+     * Create instance of Singleton class
+     */
     public static StudentDao getInstance(){
 
         if(studentDao == null){
@@ -107,7 +111,13 @@ public class StudentDaoImpl implements StudentDao {
             final StringBuilder queryBuilder = new StringBuilder();
             String updateStudent = queryBuilder.append("update student set").toString();
             boolean hasNextField = false;
-            int name = 1, standard = 1, emailId = 1, phoneNo = 1, date = 1, rollNo = 1, count = 0;
+            int name = 1;
+            int standard = 1;
+            int emailId = 1;
+            int phoneNo = 1;
+            int date = 1;
+            int rollNo = 1;
+            int count = 0;
 
             if (student.getName() != null) {
                 updateStudent = queryBuilder.append(" name = ?").toString();
@@ -164,15 +174,19 @@ public class StudentDaoImpl implements StudentDao {
             if (student.getName() != null) {
                 statement.setString(name, student.getName());
             }
+
             if (student.getStandard() != null) {
                 statement.setString(standard, student.getStandard());
             }
+
             if (student.getPhonenumber() != 0) {
                 statement.setLong(phoneNo, student.getPhonenumber());
             }
+
             if (student.getEmailId() != null) {
                 statement.setString(emailId, student.getEmailId());
             }
+
             if (student.getDate() != null) {
                 statement.setDate(date, student.getDate());
             }
