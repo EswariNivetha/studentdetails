@@ -12,20 +12,14 @@ import java.util.Map;
  */
 public interface StudentRestController {
 
-
     Map addStudent(final Student student);
-
 
     Map removeStudent(final int rollNo);
 
-
     Map updateStudentDetails(final Student student);
-
 
     List selectStudent(final int rollNo);
 
-
     List getAllStudents(final int page,final int limit);
-
 
 }
