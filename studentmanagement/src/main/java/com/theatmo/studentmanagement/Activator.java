@@ -15,7 +15,7 @@ public class Activator implements BundleActivator {
      *
      * @param context
      */
-    public void start(BundleContext context) {
+    public void start(final BundleContext context) {
         System.out.println("Starting the View bundle");
     }
 
@@ -24,7 +24,7 @@ public class Activator implements BundleActivator {
      *
      * @param context
      */
-    public void stop(BundleContext context) {
+    public void stop(final BundleContext context) {
         System.out.println("Stopping the bundle");
     }
 }

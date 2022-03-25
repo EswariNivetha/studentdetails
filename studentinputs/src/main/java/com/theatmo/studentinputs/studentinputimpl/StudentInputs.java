@@ -40,13 +40,13 @@ public class StudentInputs implements StudentInputService{
      *
      * @param content
      */
-    public String getString(String content) {
+    public String getString(final String content) {
         System.out.println(content);
 
         try {
             return SCANNER.next().trim();
         } catch (InputMismatchException e) {
-            System.out.println("Enter Correct Value");
+            LOGGER.warn("Enter Correct Value");
             return getString(content);
         }
     }

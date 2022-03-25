@@ -14,12 +14,11 @@ public interface StudentRestController {
 
     Map addStudent(final Student student);
 
-    Map removeStudent(final int rollNo);
+    Map removeStudent(final Integer rollNo);
 
     Map updateStudentDetails(final Student student);
 
-    List selectStudent(final int rollNo);
+    List selectStudent(final Integer rollNo);
 
     List getAllStudents(final int page,final int limit);
-
 }

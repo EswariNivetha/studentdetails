@@ -1,5 +1,7 @@
 package com.theatmo.studentmanagement.model;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.sql.Date;
 
 /**
@@ -9,18 +11,29 @@ import java.sql.Date;
  */
 public class Student {
 
-    private int rollNo;
+    @NotNull(message = "Please Enter RollNo", groups = {StudentSelectChecks.class, StudentAddChecks.class, StudentUpdateChecks.class, StudentSelectChecks.class, StudentDeleteChecks.class})
+    private Integer rollNo;
+
+    @NotNull(message = "Please Enter Name", groups = {StudentAddChecks.class, StudentUpdateChecks.class})
     private String name;
+
+    @NotNull(message = "Please Enter Standard", groups = {StudentAddChecks.class, StudentUpdateChecks.class})
     private String standard;
-    private long phoneNumber;
+
+    @NotNull(message = "Please Enter PhoneNumber", groups = {StudentAddChecks.class, StudentUpdateChecks.class})
+    private Long phoneNumber;
+
+    @NotNull(message = "Please Enter MailId", groups = {StudentAddChecks.class, StudentUpdateChecks.class})
     private String emailId;
+
+    @NotNull(message = "Please Enter Date", groups = {StudentAddChecks.class, StudentUpdateChecks.class})
     private Date date;
 
     public Student() {
         super();
     }
 
-    public Student(int rollNo, String name, String standard, long phoneNumber, String emailId, Date date) {
+    public Student(Integer rollNo, String name, String standard, Long phoneNumber, String emailId, Date date) {
         this.rollNo = rollNo;
         this.name = name;
         this.standard = standard;
@@ -29,11 +42,11 @@ public class Student {
         this.date = date;
     }
 
-    public int getRollNo() {
+    public Integer getRollNo() {
         return rollNo;
     }
 
-    public void setRollNo(int rollNo) {
+    public void setRollNo(Integer rollNo) {
         this.rollNo = rollNo;
     }
 
@@ -53,11 +66,11 @@ public class Student {
         this.standard = standard;
     }
 
-    public long getPhonenumber() {
+    public Long getPhonenumber() {
         return phoneNumber;
     }
 
-    public void setPhonenumber(long phonenumber) {
+    public void setPhonenumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

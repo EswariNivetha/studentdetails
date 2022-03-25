@@ -1,15 +1,18 @@
 package com.theatmo.studentmanagement.controller;
 
-import com.theatmo.studentmanagement.model.Student;
+import com.theatmo.studentmanagement.model.*;
 import com.theatmo.studentmanagement.service.StudentRestService;
 import com.theatmo.studentmanagement.service.StudentRestServiceImpl;
+import jakarta.validation.Valid;
 
 import javax.ws.rs.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * StudentApi implements the Api Service .
+ * StudentRestController implements the Api Service.
  *
  * @author EswariNivethaVU
  */
@@ -19,7 +22,7 @@ public class StudentRestControllerImpl implements StudentRestController {
     private static final StudentRestService STUDENT_REST_SERVICE = new StudentRestServiceImpl();
 
     /**
-     * Adds new Student using api.
+     * Adds new Student by using api.
      *
      * @param student
      */
@@ -28,25 +31,41 @@ public class StudentRestControllerImpl implements StudentRestController {
     @Produces("application/json")
     @POST
     @Override
-    public Map addStudent(final Student student) {
+    public Map addStudent(@Valid final Student student) {
+        final List addStudentList = StudentValidator.validator(student);
+
+        if (!addStudentList.isEmpty()) {
+            final Map message = new HashMap();
+
+            message.put("Message", addStudentList);
+            return message;
+        }
         return STUDENT_REST_SERVICE.addStudent(student);
     }
 
     /**
-     * Deletes student using api.
+     * Deletes student by using api.
      *
      * @param rollNo
      */
-    @Path("/{rollNo}")
+    @Path("/delete")
     @Produces("application/json")
     @DELETE
     @Override
-    public Map removeStudent(@PathParam("rollNo") final int rollNo) {
+    public Map removeStudent(@Valid @QueryParam("rollNo") final Integer rollNo) {
+        final List removeStudentList = StudentValidator.idValidator(rollNo);
+
+        if (!removeStudentList.isEmpty()) {
+            final Map message = new HashMap();
+
+            message.put("Message", removeStudentList);
+            return message;
+        }
         return STUDENT_REST_SERVICE.removeStudent(rollNo);
     }
 
     /**
-     * Update Student using api.
+     * Update Student by using api.
      *
      * @param student
      */
@@ -55,23 +74,40 @@ public class StudentRestControllerImpl implements StudentRestController {
     @Produces("application/json")
     @PUT
     @Override
-    public Map updateStudentDetails(Student student) {
+    public Map updateStudentDetails(@Valid final Student student) {
+        final List updateStudentList = StudentValidator.validator(student);
+
+        if (!updateStudentList.isEmpty()) {
+            final Map message = new HashMap();
+
+            message.put("Message", updateStudentList);
+            return message;
+        }
         return STUDENT_REST_SERVICE.updateStudentDetails(student);
     }
 
     /**
-     * Select Student using rollNo.
+     * Select Student by using rollNo.
      */
-    @Path("/{rollNo}")
+    @Path("/select")
     @Produces("application/json")
+    @Consumes("application/json")
     @GET
     @Override
-    public List selectStudent(@PathParam("rollNo") final int rollNo) {
+    public List selectStudent(@Valid @QueryParam("rollNo") final Integer rollNo) {
+        final List selectStudentList = StudentValidator.idValidator(rollNo);
+
+        if (!selectStudentList.isEmpty()) {
+            final List selectList = new ArrayList();
+
+            selectList.add(selectStudentList);
+            return selectStudentList;
+        }
         return STUDENT_REST_SERVICE.selectStudent(rollNo);
     }
 
     /**
-     * Shows all Students using api and pagination.
+     * Shows all Students by using api and pagination.
      *
      * @param page
      * @param limit
@@ -80,7 +116,7 @@ public class StudentRestControllerImpl implements StudentRestController {
     @Produces("application/json")
     @GET
     @Override
-    public List getAllStudents(@QueryParam("page") final int page, @DefaultValue("3") @QueryParam("limit") final int limit) {
+    public List getAllStudents(@Valid @QueryParam("page") final int page, @DefaultValue("3") @QueryParam("limit") final int limit) {
         return STUDENT_REST_SERVICE.getAllStudents(page, limit);
     }
 }

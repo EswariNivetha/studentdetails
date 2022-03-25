@@ -213,11 +213,11 @@ public class StudentDaoImpl implements StudentDao {
             try (ResultSet resultset = statement.executeQuery();) {
 
                 while (resultset.next()) {
-                    String name = resultset.getString(2);
-                    String standard = resultset.getString(3);
-                    String emailid = resultset.getString(4);
-                    long phoneno = resultset.getLong(5);
-                    Date joiningdate = resultset.getDate(6);
+                    final String name = resultset.getString(2);
+                    final String standard = resultset.getString(3);
+                    final String emailid = resultset.getString(4);
+                    final long phoneno = resultset.getLong(5);
+                    final Date joiningdate = resultset.getDate(6);
 
                     student = new Student(rollno, name, standard, phoneno, emailid, joiningdate);
                 }

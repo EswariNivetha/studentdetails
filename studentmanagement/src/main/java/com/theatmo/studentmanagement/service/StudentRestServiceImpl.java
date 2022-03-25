@@ -9,14 +9,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Student Rest Service Implementation Implements the service provided by Student Rest Service.
+ *
+ * @author EswariNivethaVU
+ */
 public class StudentRestServiceImpl implements StudentRestService {
 
     private static final StudentDao STUDENTDAO = StudentDaoImpl.getInstance();
 
+    /**
+     * Adds the student details to database by using Api.
+     *
+     * @param student
+     */
     @Override
-    public Map addStudent(Student student) {
+    public Map addStudent(final Student student) {
         final Map map = new HashMap<>();
         boolean isAdded = false;
+
         if (!STUDENTDAO.getAllStudents().containsKey(student.getRollNo())) {
             isAdded = STUDENTDAO.addStudent(student);
         }
@@ -24,18 +35,30 @@ public class StudentRestServiceImpl implements StudentRestService {
         return map;
     }
 
+    /**
+     * Removes the student details from database by using Api.
+     *
+     * @param rollNo
+     */
     @Override
-    public Map removeStudent(int rollNo) {
+    public Map removeStudent(final Integer rollNo) {
         final Map map = new HashMap<>();
         final boolean isDeleted = STUDENTDAO.removeStudent(rollNo);
+
         map.put("Status deleted", isDeleted);
         return map;
     }
 
+    /**
+     * Get All Students details from database by using Api.
+     *
+     * @param page
+     *
+     * @param limit
+     */
     @Override
-    public List getAllStudents(int page, int limit) {
-        List<Student> list = new ArrayList<>(STUDENTDAO.getAllStudents().values());
-
+    public List getAllStudents(final int page, final int limit) {
+        List<Student> studentList = new ArrayList<>(STUDENTDAO.getAllStudents().values());
         int start = 0, end = 0;
 
         if (page > 0 && limit >= 0) {
@@ -43,10 +66,10 @@ public class StudentRestServiceImpl implements StudentRestService {
             end = limit * page;
         }
 
-        if (start < list.size() && end < list.size()) {
-            return list.subList(start, end);
-        } else if (start < list.size()) {
-            return list.subList(start, list.size());
+        if (start < studentList.size() && end < studentList.size()) {
+            return studentList.subList(start, end);
+        } else if (start < studentList.size()) {
+            return studentList.subList(start, studentList.size());
         } else {
             final List emptyList = new ArrayList();
             emptyList.add("Page not found");
@@ -54,8 +77,13 @@ public class StudentRestServiceImpl implements StudentRestService {
         }
     }
 
+    /**
+     * Select Student details from database by using Api.
+     *
+     * @param rollNo
+     */
     @Override
-    public List selectStudent(int rollNo) {
+    public List selectStudent(final Integer rollNo) {
         final List studentList = new ArrayList();
         final Student selectStudent = STUDENTDAO.selectStudent(rollNo);
 
@@ -68,10 +96,19 @@ public class StudentRestServiceImpl implements StudentRestService {
         }
     }
 
+    /**
+     * Update Student Details to database by using Api.
+     *
+     * @param student
+     */
     @Override
-    public Map updateStudentDetails(Student student) {
+    public Map updateStudentDetails(final Student student) {
         final Map map = new HashMap<>();
-        final boolean isUpdated = STUDENTDAO.updateStudents(student);
+        boolean isUpdated = false;
+
+        if(STUDENTDAO.getAllStudents().containsKey(student.getRollNo())){
+            isUpdated = STUDENTDAO.updateStudents(student);
+        }
         map.put("Status updated", isUpdated);
         return map;
     }
